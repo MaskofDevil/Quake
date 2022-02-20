@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoidm9ybWlyIiwiYSI6ImNrem81OGVtZTBhaWQydnFtdnZ1c
 
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/outdoors-v11',
+    style: 'mapbox://styles/vormir/ckzo5g2rg002l15r0jsz86gsz',
     center: [-122.44121, 37.76132],
     zoom: 3.5
 })
@@ -28,7 +28,7 @@ map.on('load', () => {
                 [
                     'interpolate',
                     ['linear'],
-                    ['get', 'mag'], 1, 8, 1.5, 10, 2, 12, 2.5, 14, 3, 16, 3.5, 18, 4.5, 20, 6.5, 22, 8.5, 24, 10.5, 26
+                    ['get', 'mag'], 1, 10, 2, 12, 3, 14, 4, 16, 5, 18, 6, 20, 7, 22
                 ],
                 [
                     'interpolate',
@@ -36,16 +36,16 @@ map.on('load', () => {
                     ['get', 'mag'], 1, 1, 1.5, 1.5, 2, 2, 2.5, 2.5, 3, 3, 3.5, 3.5, 4.5, 4.5, 5, 5
                 ]
             ],
-            'circle-opacity': 0.5,
+            'circle-opacity': 0.8,
             'circle-color': [
                 'case',
                 ['boolean', ['feature-state', 'hover'], false],
                 [
                     'interpolate',
                     ['linear'],
-                    ['get', 'mag'], 1, '#fff7ec', 1.5, '#fee8c8', 2, '#fdd49e', 2.5, '#fdbb84', 3, '#fc8d59', 3.5, '#ef6548', 4.5, '#d7301f', 6.5, '#b30000', 8.5, '#7f0000', 10.5, '#000'
+                    ['get', 'mag'], 1, '#f1b36f', 2, '#f0ae64', 3, '#f0a95a', 4, '#f19f4c', 5, '#f58b3b', 6, '#f97a2c', 7, '#fc691d'
                 ],
-                '#000'
+                '#fc691d'
             ]
         }
     })

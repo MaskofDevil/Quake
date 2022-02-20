@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 body 
 {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 #map 
@@ -12,16 +15,21 @@ body
     width: 100%;
 }
 
-.quake-info {
+.quake-info 
+{
     position: absolute;
-    font-family: sans-serif;
     margin-top: 5px;
     margin-left: 5px;
     padding: 5px;
     width: 30%;
     border: 2px solid black;
     font-size: 14px;
-    color: #222;
-    background-color: #fff;
+    color: #fff;
+    background-color: #05002e;
     border-radius: 3px;
+}
+
+strong
+{
+    color: #7c7a91;
 }
