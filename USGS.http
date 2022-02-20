@@ -1,0 +1,9 @@
+// NOTE - Format - https://earthquake.usgs.gov/fdsnws/event/1/[METHOD[?PARAMETERS]]
+
+// Count total number of earthquakes in a range
+https://earthquake.usgs.gov/fdsnws/event/1/count?starttime=2022-02-01&endtime=2022-02-19
+
+# https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2014-01-01&endtime=2014-01-02
+
+// Earthquake by id
+# https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=ci11408890&format=geojson
