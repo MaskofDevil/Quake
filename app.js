@@ -4,7 +4,7 @@ const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/vormir/ckzo5g2rg002l15r0jsz86gsz',
     center: [-122.44121, 37.76132],
-    zoom: 3.5
+    zoom: 1
 })
 
 const mag = document.getElementById('mag')
@@ -28,7 +28,7 @@ map.on('load', () => {
                 [
                     'interpolate',
                     ['linear'],
-                    ['get', 'mag'], 1, 10, 2, 12, 3, 14, 4, 16, 5, 18, 6, 20, 7, 22
+                    ['get', 'mag'], 1, 7, 2, 9, 3, 11, 4, 13, 5, 15, 6, 17, 7, 19
                 ],
                 [
                     'interpolate',
@@ -36,7 +36,7 @@ map.on('load', () => {
                     ['get', 'mag'], 1, 1, 1.5, 1.5, 2, 2, 2.5, 2.5, 3, 3, 3.5, 3.5, 4.5, 4.5, 5, 5
                 ]
             ],
-            'circle-opacity': 0.8,
+            'circle-opacity': 0.9,
             'circle-color': [
                 'case',
                 ['boolean', ['feature-state', 'hover'], false],

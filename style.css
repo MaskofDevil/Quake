@@ -23,10 +23,11 @@ body
     padding: 5px;
     width: 30%;
     border: 2px solid black;
+    border-radius: 3px;
+    z-index: 1;
     font-size: 14px;
     color: #fff;
     background-color: #05002e;
-    border-radius: 3px;
 }
 
 strong
