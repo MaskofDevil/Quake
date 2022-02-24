@@ -3,7 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoidm9ybWlyIiwiYSI6ImNrem81OGVtZTBhaWQydnFtdnZ1c
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/vormir/ckzo5g2rg002l15r0jsz86gsz',
-    center: [-122.44121, 37.76132],
+    center: [0, 0],
     zoom: 1
 })
 
@@ -14,13 +14,16 @@ const date = document.getElementById('date')
 map.on('load', () => {
     map.addSource('earthquakes', {
         type: 'geojson',
-        data: 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake',
+        data: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson',
         generateId: true
     })
     map.addLayer({
         id: 'earthquakes-viz',
         type: 'circle',
         source: 'earthquakes',
+        layout: {
+            'visibility': 'visible'
+        },
         paint: {
             'circle-radius': [
                 'case',
@@ -51,59 +54,59 @@ map.on('load', () => {
     })
 })
 
-let quakeID = null
+// let quakeID = null
 
-map.on('mousemove', 'earthquakes-viz', (event) => {
-    map.getCanvas().style.cursor = 'pointer'
+// map.on('mousemove', 'earthquakes-viz', (event) => {
+//     map.getCanvas().style.cursor = 'pointer'
 
-    const quakeMagnitude = event.features[0].properties.mag
-    const quakeLocation = event.features[0].properties.place
-    const quakeDate = new Date(event.features[0].properties.time)
+//     const quakeMagnitude = event.features[0].properties.mag
+//     const quakeLocation = event.features[0].properties.place
+//     const quakeDate = new Date(event.features[0].properties.time)
 
-    if (event.features.length === 0) return
+//     if (event.features.length === 0) return
 
-    mag.textContent = quakeMagnitude
-    loc.textContent = quakeLocation
-    date.textContent = quakeDate
+//     mag.textContent = quakeMagnitude
+//     loc.textContent = quakeLocation
+//     date.textContent = quakeDate
 
-    if (quakeID) {
-        map.removeFeatureState({
-            source: 'earthquakes',
-            id: quakeID
-        })
-    }
+//     if (quakeID) {
+//         map.removeFeatureState({
+//             source: 'earthquakes',
+//             id: quakeID
+//         })
+//     }
 
-    quakeID = event.features[0].id
+//     quakeID = event.features[0].id
 
-    map.setFeatureState(
-        {
-            source: 'earthquakes',
-            id: quakeID
-        },
-        {
-            hover: true
-        }
-    )
-})
+//     map.setFeatureState(
+//         {
+//             source: 'earthquakes',
+//             id: quakeID
+//         },
+//         {
+//             hover: true
+//         }
+//     )
+// })
 
-map.on('mouseleave', 'earthquakes-viz', () => {
-    if (quakeID) {
-        map.setFeatureState(
-            {
-                source: 'earthquakes',
-                id: quakeID
-            },
-            {
-                hover: false
-            }
-        )
-    }
+// map.on('mouseleave', 'earthquakes-viz', () => {
+//     if (quakeID) {
+//         map.setFeatureState(
+//             {
+//                 source: 'earthquakes',
+//                 id: quakeID
+//             },
+//             {
+//                 hover: false
+//             }
+//         )
+//     }
 
-    quakeID = null
+//     quakeID = null
 
-    mag.textContent = ''
-    loc.textContent = ''
-    date.textContent = ''
+//     mag.textContent = ''
+//     loc.textContent = ''
+//     date.textContent = ''
 
-    map.getCanvas().style.cursor = ''
-})
+//     map.getCanvas().style.cursor = ''
+// })

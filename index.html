@@ -12,10 +12,20 @@
 </head>
 
 <body>
-    <nav class="quake-info" id="menu">
-        <div><strong>Magnitude:</strong> <span id="mag"></span></div>
+    <nav class="menu" id="menu">
+        <div class="time">
+            <input type="radio" name="time" id="hour" value="hour" checked>
+            <label for="hour">Past hour</label>
+            <input type="radio" name="time" id="day" value="day">
+            <label for="day">Past day</label>
+            <input type="radio" name="time" id="week" value="week">
+            <label for="week">Past week</label>
+            <input type="radio" name="time" id="month" value="month">
+            <label for="month">Past month</label>
+        </div>
+        <!-- <div><strong>Magnitude:</strong> <span id="mag"></span></div>
         <div><strong>Location:</strong> <span id="loc"></span></div>
-        <div><strong>Date:</strong> <span id="date"></span></div>
+        <div><strong>Date:</strong> <span id="date"></span></div> -->
     </nav>
     <div id="map"></div>
     <script src="app.js"></script>

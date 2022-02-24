@@ -15,19 +15,27 @@ body
     width: 100%;
 }
 
-.quake-info 
+.menu
 {
     position: absolute;
-    margin-top: 5px;
-    margin-left: 5px;
-    padding: 5px;
-    width: 30%;
-    border: 2px solid black;
+    bottom: 0;
+    width: 100%;
     border-radius: 3px;
-    z-index: 1;
+    z-index: 9999;
     font-size: 14px;
     color: #fff;
     background-color: #05002e;
+}
+
+.menu > *
+{
+    padding: 0.7rem;
+}
+
+.time
+{
+    display: flex;
+    justify-content: center;
 }
 
 strong
