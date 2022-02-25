@@ -1,10 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+:root
+{
+    --light-one: #fff;
+    --dark-one: #05002e;
+    --blue-one: #1e90ff;
+    --blue-two: #1e80ff;
+}
+
 body 
 {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    background-color: var(--dark-one);
+}
+
+button
+{
+    border: none;
+    background-color: var(--blue-one);
+}
+
+button:hover
+{
+    background-color: var(--blue-two);
 }
 
 #map 
@@ -15,30 +35,76 @@ body
     width: 100%;
 }
 
-.menu
+#menu
 {
     position: absolute;
     bottom: 0;
     width: 100%;
-    border-radius: 3px;
+    padding: 0.4rem 0;
     z-index: 9999;
-    font-size: 14px;
-    color: #fff;
-    background-color: #05002e;
+    background-color: var(--dark-one);
+    display: flex;
+    justify-content: space-around;
 }
 
-.menu > *
+#menu select
 {
-    padding: 0.7rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: var(--light-one);
+    background-color: var(--dark-one);
 }
 
-.time
+#menu form
 {
     display: flex;
-    justify-content: center;
 }
 
-strong
+#duration > *
 {
-    color: #7c7a91;
+    width: 2.3rem;
+    outline: none;
+    border: none;
+    color: var(--light-one);
+    background-color: var(--dark-one);
+}
+
+#duration input:nth-child(3)
+{
+    width: 3.1rem;
+}
+
+#magnitude input
+{
+    width: 4.8rem;
+    outline: none;
+    border: none;
+    color: var(--light-one);
+    background-color: var(--dark-one);
+}
+
+#submit
+{
+    border-radius: 1.2rem;
+    cursor: pointer;
+}
+
+#info
+{
+    position: absolute;
+    right: 0;
+    z-index: 8999;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+#info a
+{
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--light-one);
+    opacity: 0.7;
+    text-decoration: none;
+    cursor: pointer;
 }

@@ -12,21 +12,33 @@
 </head>
 
 <body>
-    <nav class="menu" id="menu">
-        <div class="time">
-            <input type="radio" name="time" id="hour" value="hour" checked>
-            <label for="hour">Past hour</label>
-            <input type="radio" name="time" id="day" value="day">
-            <label for="day">Past day</label>
-            <input type="radio" name="time" id="week" value="week">
-            <label for="week">Past week</label>
-            <input type="radio" name="time" id="month" value="month">
-            <label for="month">Past month</label>
-        </div>
-        <!-- <div><strong>Magnitude:</strong> <span id="mag"></span></div>
-        <div><strong>Location:</strong> <span id="loc"></span></div>
-        <div><strong>Date:</strong> <span id="date"></span></div> -->
+    <nav id="menu">
+        <select name="" id="">
+            <option value="all_hour">Past hour</option>
+            <option value="all_day">Past day</option>
+            <option value="all_week">Past week</option>
+            <option value="all_month">Past month</option>
+        </select>
+        <form action="#">
+            <section id="duration">
+                <input type="number" placeholder="DD" min="1" max="31">
+                <input type="number" placeholder="MM" min="1" max="12">
+                <input type="number" placeholder="YYYY">
+            </section>
+            <span id="magnitude">
+                <input type="number" placeholder="Magnitude" min="0">
+            </span>
+            <button type="submit" id="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#fff">
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+                </svg>
+            </button>
+        </form>
     </nav>
+    <div id="info">
+        <a href="https://github.com/MaskofDevil">&copy;MaskofDevil</a>
+    </div>
     <div id="map"></div>
     <script src="app.js"></script>
 </body>
