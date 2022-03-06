@@ -3,54 +3,75 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoidm9ybWlyIiwiYSI6ImNrem81OGVtZTBhaWQydnFtdnZ1c
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/vormir/ckzo5g2rg002l15r0jsz86gsz',
-    center: [0, 0],
     zoom: 1
 })
 
-const mag = document.getElementById('mag')
-const loc = document.getElementById('loc')
-const date = document.getElementById('date')
+// let api_call = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson'
+// const time = document.getElementById('time').getElementsByTagName('input')
+
+// for (let i = 0; i < time.length; i++) {
+//     time[i].onclick = () => {
+//         api_call = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/' + time[i].value + '.geojson'
+//     }
+// }
+
+// const mag = document.getElementById('mag')
+// const loc = document.getElementById('loc')
+// const date = document.getElementById('date')
 
 map.on('load', () => {
-    map.addSource('earthquakes', {
-        type: 'geojson',
-        data: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson',
+    map.addSource('earthquakes-month', {
+        type: 'vector',
+        url: 'mapbox://vormir.ct3sxzef',
         generateId: true
     })
     map.addLayer({
-        id: 'earthquakes-viz',
+        id: 'earthquakes-month',
         type: 'circle',
-        source: 'earthquakes',
+        source: 'earthquakes-month',
         layout: {
             'visibility': 'visible'
         },
         paint: {
-            'circle-radius': [
-                'case',
-                ['boolean', ['feature-state', 'hover'], false],
-                [
-                    'interpolate',
-                    ['linear'],
-                    ['get', 'mag'], 1, 7, 2, 9, 3, 11, 4, 13, 5, 15, 6, 17, 7, 19
-                ],
-                [
-                    'interpolate',
-                    ['linear'],
-                    ['get', 'mag'], 1, 1, 1.5, 1.5, 2, 2, 2.5, 2.5, 3, 3, 3.5, 3.5, 4.5, 4.5, 5, 5
-                ]
-            ],
+            'circle-radius': 5,
             'circle-opacity': 0.9,
-            'circle-color': [
-                'case',
-                ['boolean', ['feature-state', 'hover'], false],
-                [
-                    'interpolate',
-                    ['linear'],
-                    ['get', 'mag'], 1, '#f1b36f', 2, '#f0ae64', 3, '#f0a95a', 4, '#f19f4c', 5, '#f58b3b', 6, '#f97a2c', 7, '#fc691d'
-                ],
-                '#fc691d'
-            ]
-        }
+            'circle-color': '#fc691d'
+        },
+        'source-layer': 'all_month-810n6l'
+    })
+
+    map.addSource('earthquakes-week', {
+        type: 'vector',
+        url: 'mapbox://vormir.6p6wjj7v',
+        generateId: true
+    })
+    map.addLayer({
+        id: 'earthquakes-week',
+        type: 'circle',
+        source: 'earthquakes-week',
+        layout: {
+            'visibility': 'visible'
+        },
+        paint: {
+            'circle-radius': 5,
+            'circle-opacity': 0.9,
+            'circle-color': '#6deb9c'
+        },
+        'source-layer': 'all_week-7i42kp'
+    })
+})
+
+map.on('idle', () => {
+    const selection = document.getElementById('selection')
+
+    const toggleLayerIds = ['earthquakes-month', 'earthquakes-week']
+
+    for (let id of toggleLayerIds) {
+        // TODO
+    }
+
+    selection.addEventListener('click', () => {
+        console.log(selection.value)
     })
 })
 
