@@ -20,6 +20,16 @@ const map = new mapboxgl.Map({
 // const date = document.getElementById('date')
 
 map.on('load', () => {
+
+    // REVIEW - Theme/Style toggle
+    // const style = map.getStyle()
+    // console.log(style.sprite)
+
+    // document.getElementById('theme-toggle').addEventListener('click', () => {
+    //     map.setStyle("mapbox://styles/mapbox/streets-v11")
+    // })
+
+    // NOTE - Earthquakes grouped by - past hour, past day, past week and past month
     map.addSource('earthquakes-month', {
         type: 'vector',
         url: 'mapbox://vormir.ct3sxzef',
