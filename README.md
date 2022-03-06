@@ -54,14 +54,9 @@ Insert gif or link to demo
 
 ## Tech Stack
 
-**Client:** React, Redux, TailwindCSS
+**Client:** HTML, CSS, JavaScript
 
-**Server:** Node, Express
-
-
-## Lessons Learned
-
-What did you learn while building this project? What challenges did you face and how did you overcome them?
+**Server:** Mapbox GL JS, USGS api
 
 
 ## Roadmap
