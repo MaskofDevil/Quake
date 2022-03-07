@@ -1,4 +1,6 @@
-mapboxgl.accessToken = 'pk.eyJ1Ijoidm9ybWlyIiwiYSI6ImNrem81OGVtZTBhaWQydnFtdnZ1cGh2NnUifQ.nUvum4Lnw_0dQp60KQiWXQ';
+import TOKEN from './config.js'
+
+mapboxgl.accessToken = TOKEN;
 
 const map = new mapboxgl.Map({
     container: 'map',
@@ -28,6 +30,25 @@ map.on('load', () => {
     // document.getElementById('theme-toggle').addEventListener('click', () => {
     //     map.setStyle("mapbox://styles/mapbox/streets-v11")
     // })
+
+    // NOTE - Tectonic Plates
+    map.addSource('tectonic-plates', {
+        type: 'geojson',
+        data: 'https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json'
+    })
+    map.addLayer({
+        id: 'tectonic-plates',
+        type: 'line',
+        source: 'tectonic-plates',
+        layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        paint: {
+            'line-color': '#fff',
+            'line-width': 2
+        }
+    })
 
     // NOTE - Earthquakes grouped by - past hour, past day, past week and past month
     map.addSource('earthquakes-month', {

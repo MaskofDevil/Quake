@@ -13,37 +13,70 @@
 
 <body>
     <nav id="menu">
-        <select name="" id="selection">
-            <option value="all_hour">Past hour</option>
-            <option value="all_day">Past day</option>
-            <option value="all_week">Past week</option>
-            <option value="all_month">Past month</option>
-        </select>
-        <form action="#">
-            <section id="duration">
-                <input type="number" placeholder="DD" min="1" max="31">
-                <input type="number" placeholder="MM" min="1" max="12">
-                <input type="number" placeholder="YYYY">
+        <svg id="toggle-menu" class="active" width="20" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.37 10.8L8.99 16.54L1.62 10.81L0 12.07L9 19.07L18 12.07L16.37 10.8ZM9 0L0 7L1.63 8.27L9 14L16.36 8.27L18 7L9 0ZM9 11.47L3.26 7L9 2.53L14.74 7L9 11.47Z" fill="white" />
+        </svg>
+        <div id="full-menu" class="inactive">
+            <section>
+                <div>
+                    <input id="all_hour" type="radio" name="radio_buttons" value="Past hour" checked>
+                    <label for="all_hour">Past hour</label>
+                </div>
+                <div>
+                    <input id="all_day" type="radio" name="radio_buttons" value="Past day">
+                    <label for="all_day">Past day</label>
+                </div>
+                <div>
+                    <input id="all_week" type="radio" name="radio_buttons" value="Past week">
+                    <label for="all_week">Past week</label>
+                </div>
+                <div>
+                    <input id="all_month" type="radio" name="radio_buttons" value="Past month">
+                    <label for="all_month">Past month</label>
+                </div>
             </section>
-            <span id="magnitude">
-                <input type="number" placeholder="Magnitude" min="0">
-            </span>
-            <button type="submit" id="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#fff">
-                    <path d="M0 0h24v24H0z" fill="none" />
-                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
-                </svg>
-            </button>
-        </form>
-        <span id="theme-toggle">
-
-        </span>
+            <section>
+                <div>
+                    <input id="earthquakes" type="checkbox" name="checkboxes" checked>
+                    <label for="earthquakes">Earthquakes</label>
+                </div>
+                <div>
+                    <input id="tectonic_plates" type="checkbox" name="checkboxes">
+                    <label for="tectonic_plates">Tectonic Plates</label>
+                </div>
+            </section>
+            <form action="#">
+                <div class="duration">
+                    <!-- REVIEW - Remove min, max attribute and implement those in JS along with form validation -->
+                    <input id="day" type="number" placeholder="DD" min="1" max="31">
+                    <input id="month" type="number" placeholder="MM" min="1" max="12">
+                    <input id="year" type="number" placeholder="YYYY" min="1900" max="2022">
+                </div>
+                <div>
+                    <input id="magnitude" type="number" placeholder="Magnitude" min="0">
+                    <button id="submit" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#fff">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div id="close" class="inactive">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" fill="#fff">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path d="M14.59 8L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+            </svg>
+        </div>
     </nav>
+    <nav id="theme-toggle"></nav>
     <div id="info">
         <a href="https://github.com/MaskofDevil" target="_blank">&copy;MaskofDevil</a>
     </div>
     <div id="map"></div>
-    <!-- <script src="app.js"></script> -->
+    <script src="app.js" type="module"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
