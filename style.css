@@ -49,7 +49,7 @@ button:hover
     position: absolute;
     top: 1rem;
     left: 1rem;
-    padding: 0.6rem;
+    padding: 1rem;
     z-index: 9999;
     color: var(--light-one);
     background-color: var(--dark-one);
@@ -58,24 +58,25 @@ button:hover
     flex-direction: column;
 }
 
-#menu div section, .duration, #magnitude
+#full-menu section, .duration, #magnitude
 {
     margin: 0.3rem 0;
 }
 
-#menu div section
+#full-menu section
 {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
 }
 
-#menu div section div > *
+#full-menu section div > *
 {
     display: inline-flex;
+    user-select: none;
 }
 
-#toggle-menu, #menu div section div > *, #submit, #close, #theme-toggle
+#toggle-menu, #full-menu section div > *, #submit, #close, #theme-toggle
 {
     cursor: pointer;
 }
@@ -121,6 +122,7 @@ button:hover
 #close
 {
     position: absolute;
+    top: 0.5rem;
     right: 0.5rem;
 }
 

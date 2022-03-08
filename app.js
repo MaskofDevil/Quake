@@ -33,77 +33,107 @@ map.on('load', () => {
 
     // NOTE - Tectonic Plates
     map.addSource('tectonic-plates', {
-        type: 'geojson',
-        data: 'https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json'
+        type: 'vector',
+        url: 'mapbox://vormir.9teewsr6'
     })
     map.addLayer({
-        id: 'tectonic-plates',
+        id: 'Tectonic Plates',
         type: 'line',
         source: 'tectonic-plates',
         layout: {
+            'visibility': 'none',
             'line-join': 'round',
             'line-cap': 'round'
         },
         paint: {
             'line-color': '#fff',
-            'line-width': 2
-        }
+            'line-width': 1.5
+        },
+        'source-layer': 'PB2002_boundaries-34gn86'
     })
 
-    // NOTE - Earthquakes grouped by - past hour, past day, past week and past month
-    map.addSource('earthquakes-month', {
+    // NOTE - Orogens
+    map.addSource('orogens', {
         type: 'vector',
-        url: 'mapbox://vormir.ct3sxzef',
+        url: 'mapbox://vormir.3f7w5oo2'
+    })
+    map.addLayer({
+        id: 'Orogens',
+        type: 'fill',
+        source: 'orogens',
+        layout: {
+            'visibility': 'none'
+        },
+        paint: {
+            'fill-color': '#02fa0f',
+            'fill-opacity': 0.7,
+            'fill-outline-color': '#04cc0f'
+        },
+        'source-layer': 'PB2002_orogens-475qdc'
+    })
+
+    // NOTE - Earthquakes until past month with popup information
+    map.addSource('earthquakes', {
+        type: 'geojson',
+        data: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson',
         generateId: true
     })
     map.addLayer({
-        id: 'earthquakes-month',
+        id: 'earthquakes',
         type: 'circle',
-        source: 'earthquakes-month',
-        layout: {
-            'visibility': 'visible'
-        },
+        source: 'earthquakes',
         paint: {
             'circle-radius': 5,
             'circle-opacity': 0.9,
             'circle-color': '#fc691d'
-        },
-        'source-layer': 'all_month-810n6l'
-    })
-
-    map.addSource('earthquakes-week', {
-        type: 'vector',
-        url: 'mapbox://vormir.6p6wjj7v',
-        generateId: true
-    })
-    map.addLayer({
-        id: 'earthquakes-week',
-        type: 'circle',
-        source: 'earthquakes-week',
-        layout: {
-            'visibility': 'visible'
-        },
-        paint: {
-            'circle-radius': 5,
-            'circle-opacity': 0.9,
-            'circle-color': '#6deb9c'
-        },
-        'source-layer': 'all_week-7i42kp'
+        }
     })
 })
 
 map.on('idle', () => {
-    const selection = document.getElementById('selection')
-
-    const toggleLayerIds = ['earthquakes-month', 'earthquakes-week']
-
-    for (let id of toggleLayerIds) {
-        // TODO
+    if (!map.getLayer('Tectonic Plates') || !map.getLayer('Orogens')) {
+        return
     }
 
-    selection.addEventListener('click', () => {
-        console.log(selection.value)
-    })
+    // REVIEW - Modify textContent of the label for tectonic-plates and orogens[capitalize 1st letter & replace - with space]
+    const toggleableLayerIds = ['Tectonic Plates', 'Orogens']
+
+    for (let id of toggleableLayerIds) {
+        if (document.getElementById(id)) {
+            continue
+        }
+
+        const input = document.createElement('input')
+        input.id = id
+        input.type = 'checkbox'
+        input.checked = false
+
+        const label = document.createElement('label')
+        label.for = id
+        label.textContent = id
+
+        const div = document.createElement('div')
+        div.appendChild(input)
+        div.appendChild(label)
+
+        div.addEventListener('click', (e) => {
+            let clickedLayer = label.textContent
+            e.preventDefault()
+            e.stopPropagation()
+
+            let visibility = map.getLayoutProperty(clickedLayer, 'visibility')
+
+            if (visibility === 'visible') {
+                map.setLayoutProperty(clickedLayer, 'visibility', 'none')
+                input.checked = false
+            } else {
+                input.checked = true
+                map.setLayoutProperty(clickedLayer, 'visibility', 'visible')
+            }
+        })
+
+        document.querySelector('#full-menu section').appendChild(div)
+    }
 })
 
 // let quakeID = null
