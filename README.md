@@ -56,7 +56,7 @@ Insert gif or link to demo
 
 **Client:** HTML, CSS, JavaScript
 
-**Server:** Mapbox GL JS, USGS api
+**Server:** Mapbox GL JS, Mapbox Tileset api, USGS api
 
 
 ## Roadmap
