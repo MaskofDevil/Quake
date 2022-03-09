@@ -4,12 +4,12 @@
 
 # Quake
 
-A brief description of what this project does and who it's for
+Quake is a realtime earthquake visualization web application.
 
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Quake Screenshot](./src/assets/quake.png)
 
 
 ##### Project Structure:
@@ -17,7 +17,10 @@ A brief description of what this project does and who it's for
     Quake/
     ├── src/
     |   ├── assets/
-    |   |   └── Logo.png
+    |   |   ├── favicon.ico
+    |   |   ├── Logo.png
+    |   |   ├── quake.png
+    |   |   └── volcano.png
     |   ├── css/
     |   |   └── style.css
     |   └── js/
@@ -30,42 +33,34 @@ A brief description of what this project does and who it's for
 
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+- Realtime earthquake data
+- Specific earthquake data(by day, month, year and magnitude)
+- Visualization of tectonic plates, orogens & volcanoes
+- Different styles (such as - light, dark, night, street)
 
 
 ## Run Locally
 
 Clone the project
 
-```bash
+```
   git clone https://link-to-project
 ```
 
 Go to the project directory
 
-```bash
+```
   cd my-project
 ```
 
-Install dependencies
+Get access token from Mapbox, replace it with YOUR_ACCESS_TOKEN below and paste the whole code inside config.js
 
-```bash
-  npm install
+```
+  const TOKEN = 'YOUR_ACCESS_TOKEN'
+  export default TOKEN
 ```
 
-Start the server
-
-```bash
-  npm run start
-```
-
-
-## Demo
-
-Insert gif or link to demo
+Open index.html in any web browser
 
 
 ## Tech Stack
@@ -73,10 +68,3 @@ Insert gif or link to demo
 **Client:** HTML, CSS, JavaScript
 
 **Server:** Mapbox GL JS, Mapbox Tileset api, USGS api
-
-
-## Roadmap
-
-- Additional browser support
-
-- Add more integrations
