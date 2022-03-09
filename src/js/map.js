@@ -46,7 +46,8 @@ map.on('load', () => {
             'line-cap': 'round'
         },
         paint: {
-            'line-color': '#fff',
+            'line-color': '#82360e',
+            'line-opacity': 0.8,
             'line-width': 1.5
         },
         'source-layer': 'PB2002_boundaries-34gn86'
@@ -65,28 +66,53 @@ map.on('load', () => {
             'visibility': 'none'
         },
         paint: {
-            'fill-color': '#02fa0f',
-            'fill-opacity': 0.7,
-            'fill-outline-color': '#04cc0f'
+            'fill-color': '#bf5017',
+            'fill-opacity': 0.6
         },
         'source-layer': 'PB2002_orogens-475qdc'
     })
 
-    // NOTE - Earthquakes until past month with popup information
+    // NOTE - Earthquakes until past month
     map.addSource('earthquakes', {
         type: 'geojson',
-        data: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson',
-        generateId: true
+        data: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson'
     })
     map.addLayer({
         id: 'earthquakes',
         type: 'circle',
         source: 'earthquakes',
         paint: {
+            'circle-blur': 0.5,
+            'circle-color': '#fc691d',
+            'circle-opacity': 0.6,
             'circle-radius': 5,
-            'circle-opacity': 0.9,
-            'circle-color': '#fc691d'
+            'circle-stroke-color': '#fc691d',
+            'circle-stroke-width': 1
         }
+    })
+
+    // NOTE - Popup for earthquakes
+    const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    })
+
+    map.on('mouseenter', 'earthquakes', (e) => {
+        map.getCanvas().style.cursor = 'pointer'
+
+        let coordinates = e.features[0].geometry.coordinates.slice()
+        let title = e.features[0].properties.title
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+        }
+
+        popup.setLngLat(coordinates).setHTML(title).addTo(map)
+    })
+
+    map.on('mouseleave', 'earthquakes', () => {
+        map.getCanvas().style.cursor = ''
+        popup.remove()
     })
 })
 
