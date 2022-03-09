@@ -112,15 +112,15 @@ map.on('load', () => {
         map.getCanvas().style.cursor = 'pointer'
 
         let coordinates = e.features[0].geometry.coordinates.slice()
-        let title = e.features[0].properties.title
+        let mag = e.features[0].properties.mag
+        let place = e.features[0].properties.place
         let time = new Date(e.features[0].properties.time)
-        let text = `${title} ${moment(time).fromNow()}`
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
         }
 
-        popup.setLngLat(coordinates).setHTML(text).addTo(map)
+        popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>(${moment(time).fromNow()})</strong></span></div>`).addTo(map)
     })
 
     map.on('mouseleave', 'earthquakes', () => {
