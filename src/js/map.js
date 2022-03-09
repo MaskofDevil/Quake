@@ -8,19 +8,6 @@ const map = new mapboxgl.Map({
     zoom: 1
 })
 
-// let api_call = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson'
-// const time = document.getElementById('time').getElementsByTagName('input')
-
-// for (let i = 0; i < time.length; i++) {
-//     time[i].onclick = () => {
-//         api_call = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/' + time[i].value + '.geojson'
-//     }
-// }
-
-// const mag = document.getElementById('mag')
-// const loc = document.getElementById('loc')
-// const date = document.getElementById('date')
-
 map.on('load', () => {
 
     // REVIEW - Theme/Style toggle
@@ -90,7 +77,7 @@ map.on('load', () => {
             layout: {
                 'icon-image': 'v',
                 'icon-size': 0.5,
-                'visibility': 'visible'
+                'visibility': 'none'
             },
             'source-layer': 'volcanoes-8tw6ca'
         })
@@ -127,7 +114,7 @@ map.on('load', () => {
         let coordinates = e.features[0].geometry.coordinates.slice()
         let title = e.features[0].properties.title
         let time = new Date(e.features[0].properties.time)
-        let text = title + time
+        let text = `${title} ${moment(time).fromNow()}`
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
@@ -187,60 +174,3 @@ map.on('idle', () => {
         document.querySelector('#full-menu section').appendChild(div)
     }
 })
-
-// let quakeID = null
-
-// map.on('mousemove', 'earthquakes-viz', (event) => {
-//     map.getCanvas().style.cursor = 'pointer'
-
-//     const quakeMagnitude = event.features[0].properties.mag
-//     const quakeLocation = event.features[0].properties.place
-//     const quakeDate = new Date(event.features[0].properties.time)
-
-//     if (event.features.length === 0) return
-
-//     mag.textContent = quakeMagnitude
-//     loc.textContent = quakeLocation
-//     date.textContent = quakeDate
-
-//     if (quakeID) {
-//         map.removeFeatureState({
-//             source: 'earthquakes',
-//             id: quakeID
-//         })
-//     }
-
-//     quakeID = event.features[0].id
-
-//     map.setFeatureState(
-//         {
-//             source: 'earthquakes',
-//             id: quakeID
-//         },
-//         {
-//             hover: true
-//         }
-//     )
-// })
-
-// map.on('mouseleave', 'earthquakes-viz', () => {
-//     if (quakeID) {
-//         map.setFeatureState(
-//             {
-//                 source: 'earthquakes',
-//                 id: quakeID
-//             },
-//             {
-//                 hover: false
-//             }
-//         )
-//     }
-
-//     quakeID = null
-
-//     mag.textContent = ''
-//     loc.textContent = ''
-//     date.textContent = ''
-
-//     map.getCanvas().style.cursor = ''
-// })
