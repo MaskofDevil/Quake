@@ -149,6 +149,10 @@ button:hover
     display: none;
 }
 
+/* .mapboxgl-popup {
+    
+} */
+
 #info
 {
     position: absolute;

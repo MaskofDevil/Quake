@@ -46,7 +46,7 @@ map.on('load', () => {
             'line-cap': 'round'
         },
         paint: {
-            'line-color': '#82360e',
+            'line-color': '#ff8647',
             'line-opacity': 0.8,
             'line-width': 1.5
         },
@@ -70,6 +70,30 @@ map.on('load', () => {
             'fill-opacity': 0.6
         },
         'source-layer': 'PB2002_orogens-475qdc'
+    })
+
+    // NOTE - Volcanoes
+    map.loadImage('./src/assets/volcano.png', (error, image) => {
+        if (error) throw error
+
+        map.addImage('v', image)
+
+        map.addSource('volcanoes', {
+            type: 'vector',
+            url: 'mapbox://vormir.4n5yar0k'
+        })
+
+        map.addLayer({
+            id: 'Volcanoes',
+            type: 'symbol',
+            source: 'volcanoes',
+            layout: {
+                'icon-image': 'v',
+                'icon-size': 0.5,
+                'visibility': 'visible'
+            },
+            'source-layer': 'volcanoes-8tw6ca'
+        })
     })
 
     // NOTE - Earthquakes until past month
@@ -102,12 +126,14 @@ map.on('load', () => {
 
         let coordinates = e.features[0].geometry.coordinates.slice()
         let title = e.features[0].properties.title
+        let time = new Date(e.features[0].properties.time)
+        let text = title + time
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
         }
 
-        popup.setLngLat(coordinates).setHTML(title).addTo(map)
+        popup.setLngLat(coordinates).setHTML(text).addTo(map)
     })
 
     map.on('mouseleave', 'earthquakes', () => {
@@ -117,12 +143,12 @@ map.on('load', () => {
 })
 
 map.on('idle', () => {
-    if (!map.getLayer('Tectonic Plates') || !map.getLayer('Orogens')) {
+    if (!map.getLayer('Tectonic Plates') || !map.getLayer('Orogens') || !map.getLayer('Volcanoes')) {
         return
     }
 
     // REVIEW - Modify textContent of the label for tectonic-plates and orogens[capitalize 1st letter & replace - with space]
-    const toggleableLayerIds = ['Tectonic Plates', 'Orogens']
+    const toggleableLayerIds = ['Tectonic Plates', 'Orogens', 'Volcanoes']
 
     for (let id of toggleableLayerIds) {
         if (document.getElementById(id)) {
