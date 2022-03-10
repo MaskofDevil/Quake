@@ -8,16 +8,56 @@ const map = new mapboxgl.Map({
     zoom: 1
 })
 
+// let url_duration = [ 'all_hour', 'all_day', 'all_week', 'all_month' ]
+
+function addEarthquakes(url) {
+    // NOTE - Earthquakes until past month
+    map.addSource('earthquakes', {
+        type: 'geojson',
+        data: url
+    })
+    map.addLayer({
+        id: 'earthquakes',
+        type: 'circle',
+        source: 'earthquakes',
+        paint: {
+            'circle-blur': 0.5,
+            'circle-color': '#fc691d',
+            'circle-opacity': 0.6,
+            'circle-radius': 5,
+            'circle-stroke-color': '#fc691d',
+            'circle-stroke-width': 1
+        }
+    })
+
+    // NOTE - Popup for earthquakes
+    const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    })
+
+    map.on('mouseenter', 'earthquakes', (e) => {
+        map.getCanvas().style.cursor = 'pointer'
+
+        let coordinates = e.features[0].geometry.coordinates.slice()
+        let mag = e.features[0].properties.mag
+        let place = e.features[0].properties.place
+        let time = new Date(e.features[0].properties.time)
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+        }
+
+        popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>(${moment(time).fromNow()})</strong></span></div>`).addTo(map)
+    })
+
+    map.on('mouseleave', 'earthquakes', () => {
+        map.getCanvas().style.cursor = ''
+        popup.remove()
+    })
+}
+
 map.on('load', () => {
-
-    // REVIEW - Theme/Style toggle
-    // const style = map.getStyle()
-    // console.log(style.sprite)
-
-    // document.getElementById('theme-toggle').addEventListener('click', () => {
-    //     map.setStyle("mapbox://styles/mapbox/streets-v11")
-    // })
-
     // NOTE - Tectonic Plates
     map.addSource('tectonic-plates', {
         type: 'vector',
@@ -108,50 +148,10 @@ map.on('load', () => {
         })
     })
 
-    // NOTE - Earthquakes until past month
-    map.addSource('earthquakes', {
-        type: 'geojson',
-        data: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson'
-    })
-    map.addLayer({
-        id: 'earthquakes',
-        type: 'circle',
-        source: 'earthquakes',
-        paint: {
-            'circle-blur': 0.5,
-            'circle-color': '#fc691d',
-            'circle-opacity': 0.6,
-            'circle-radius': 5,
-            'circle-stroke-color': '#fc691d',
-            'circle-stroke-width': 1
-        }
-    })
+    addEarthquakes('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
 
-    // NOTE - Popup for earthquakes
-    const popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false
-    })
-
-    map.on('mouseenter', 'earthquakes', (e) => {
-        map.getCanvas().style.cursor = 'pointer'
-
-        let coordinates = e.features[0].geometry.coordinates.slice()
-        let mag = e.features[0].properties.mag
-        let place = e.features[0].properties.place
-        let time = new Date(e.features[0].properties.time)
-
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-        }
-
-        popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>(${moment(time).fromNow()})</strong></span></div>`).addTo(map)
-    })
-
-    map.on('mouseleave', 'earthquakes', () => {
-        map.getCanvas().style.cursor = ''
-        popup.remove()
-    })
+    // Remove loading screen after Map loaded
+    document.querySelector('.overlay').parentNode.removeChild(document.querySelector('.overlay'))
 })
 
 map.on('idle', () => {

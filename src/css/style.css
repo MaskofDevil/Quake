@@ -36,6 +36,18 @@ button:hover
     background-color: var(--blue-two);
 }
 
+.overlay
+{
+    position: absolute;
+    z-index: 9999;
+    height: 100vh;
+    width: 100vw;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #map 
 {
     position: absolute;
@@ -50,7 +62,7 @@ button:hover
     top: 1rem;
     left: 1rem;
     padding: 1rem;
-    z-index: 9999;
+    z-index: 8999;
     color: var(--light-one);
     background-color: var(--dark-one);
     border-radius: 0.2rem;
