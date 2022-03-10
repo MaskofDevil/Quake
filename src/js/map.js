@@ -40,6 +40,31 @@ map.on('load', () => {
         'source-layer': 'PB2002_boundaries-34gn86'
     })
 
+    // NOTE - Global Seismic Station Network Stations
+    // REVIEW - Show station name
+    map.loadImage('./src/assets/station.png', (error, image) => {
+        if (error) throw error
+
+        map.addImage('s', image)
+
+        map.addSource('stations', {
+            type: 'vector',
+            url: 'mapbox://vormir.5sfg2jsk'
+        })
+
+        map.addLayer({
+            id: 'GSN Stations',
+            type: 'symbol',
+            source: 'stations',
+            layout: {
+                'icon-image': 's',
+                'icon-size': 0.6,
+                'visibility': 'none'
+            },
+            'source-layer': 'Global_Stations-biqr7b'
+        })
+    })
+
     // NOTE - Orogens
     map.addSource('orogens', {
         type: 'vector',
@@ -76,7 +101,7 @@ map.on('load', () => {
             source: 'volcanoes',
             layout: {
                 'icon-image': 'v',
-                'icon-size': 0.5,
+                'icon-size': 0.6,
                 'visibility': 'none'
             },
             'source-layer': 'volcanoes-8tw6ca'
@@ -130,12 +155,12 @@ map.on('load', () => {
 })
 
 map.on('idle', () => {
-    if (!map.getLayer('Tectonic Plates') || !map.getLayer('Orogens') || !map.getLayer('Volcanoes')) {
+    if (!map.getLayer('Tectonic Plates') || !map.getLayer('GSN Stations') || !map.getLayer('Orogens') || !map.getLayer('Volcanoes')) {
         return
     }
 
     // REVIEW - Modify textContent of the label for tectonic-plates and orogens[capitalize 1st letter & replace - with space]
-    const toggleableLayerIds = ['Tectonic Plates', 'Orogens', 'Volcanoes']
+    const toggleableLayerIds = ['Tectonic Plates', 'GSN Stations', 'Orogens', 'Volcanoes']
 
     for (let id of toggleableLayerIds) {
         if (document.getElementById(id)) {
