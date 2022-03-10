@@ -9,6 +9,7 @@ const map = new mapboxgl.Map({
 })
 
 // let url_duration = [ 'all_hour', 'all_day', 'all_week', 'all_month' ]
+let isFullyLoaded = false
 
 function addEarthquakes(url) {
     // NOTE - Earthquakes until past month
@@ -149,9 +150,6 @@ map.on('load', () => {
     })
 
     addEarthquakes('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
-
-    // Remove loading screen after Map loaded
-    document.querySelector('.overlay').parentNode.removeChild(document.querySelector('.overlay'))
 })
 
 map.on('idle', () => {
@@ -159,7 +157,6 @@ map.on('idle', () => {
         return
     }
 
-    // REVIEW - Modify textContent of the label for tectonic-plates and orogens[capitalize 1st letter & replace - with space]
     const toggleableLayerIds = ['Tectonic Plates', 'GSN Stations', 'Orogens', 'Volcanoes']
 
     for (let id of toggleableLayerIds) {
@@ -197,5 +194,11 @@ map.on('idle', () => {
         })
 
         document.querySelector('#full-menu section').appendChild(div)
+    }
+
+    // Remove loading screen after Map fully loaded
+    if (!isFullyLoaded) {
+        document.querySelector('.overlay').parentNode.removeChild(document.querySelector('.overlay'))
+        isFullyLoaded = true
     }
 })
