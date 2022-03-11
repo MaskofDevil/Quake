@@ -2,8 +2,9 @@
 
 :root
 {
-    --light-one: #fff;
-    --dark-one: #000;
+    --theme-one: #fff;
+    --theme-two: #000;
+    --theme-two: #424242;
     --blue-one: #1e90ff;
     --blue-two: #1e80ff;
 }
@@ -26,6 +27,17 @@ input
     outline: none;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button 
+{
+    -webkit-appearance: none;
+}
+
+input[type=number] 
+{
+    -moz-appearance: textfield;
+}
+
 button
 {
     background-color: var(--blue-one);
@@ -34,6 +46,17 @@ button
 button:hover
 {
     background-color: var(--blue-two);
+}
+
+hr
+{
+    border: 1.2px solid var(--theme-two);
+}
+
+#menu, #start-date, #end-date, #min-mag, #max-mag
+{
+    color: var(--theme-one);
+    background-color: var(--theme-two);
 }
 
 .overlay
@@ -63,14 +86,12 @@ button:hover
     left: 1rem;
     padding: 1rem;
     z-index: 8999;
-    color: var(--light-one);
-    background-color: var(--dark-one);
     border-radius: 0.2rem;
     display: flex;
     flex-direction: column;
 }
 
-#full-menu section, .duration, #magnitude
+#full-menu section, .duration, #min-mag, #max-mag
 {
     margin: 0.3rem 0;
 }
@@ -93,40 +114,32 @@ button:hover
     cursor: pointer;
 }
 
-#day, #month, #year
+#start-date, #end-date
 {
-    color: var(--light-one);
-    background-color: var(--dark-one);
+    width: 8.2rem;
 }
 
-#day
-{
-    width: 2.3rem;
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
-#month
+.magnitude
 {
-    width: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#year
+#min-mag, #max-mag
 {
-    width: 3.3rem;
-}
-
-#magnitude
-{
-    width: 5rem;
-    outline: none;
+    width: 2rem;
     border: none;
-    color: var(--light-one);
-    background-color: var(--dark-one);
 }
 
 #submit
 {
     height: 2rem;
-    width: 2rem;
+    width: 7rem;
     margin-left: 1rem;
     border-radius: 1.2rem;
 }
@@ -150,7 +163,6 @@ button:hover
 
 .popup 
 {
-    background-color: var(--light-one);
     max-width: 10rem;
     border-radius: 0.2rem;
     display: flex;
@@ -184,7 +196,7 @@ button:hover
 {
     font-size: 0.7rem;
     font-weight: bold;
-    color: var(--light-one);
+    color: var(--theme-one);
     opacity: 0.7;
     text-decoration: none;
 }

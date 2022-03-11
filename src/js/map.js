@@ -199,6 +199,18 @@ map.on('idle', () => {
     // Remove loading screen after Map fully loaded
     if (!isFullyLoaded) {
         document.querySelector('.overlay').parentNode.removeChild(document.querySelector('.overlay'))
+        console.log('Map is Fully Loaded!')
         isFullyLoaded = true
     }
 })
+
+// // Form submission & validation
+// document.querySelector('form').addEventListener('submit', (e) => {
+//     const data = Object.fromEntries(new FormData(e.target).entries())
+//     console.log(data)
+//     e.preventDefault()
+//     document.getElementById('day').value = ''
+//     document.getElementById('month').value = ''
+//     document.getElementById('year').value = ''
+//     document.getElementById('magnitude').value = ''
+// })

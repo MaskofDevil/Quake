@@ -24,15 +24,17 @@
         <div id="full-menu" class="inactive">
             <section>
             </section>
-            <form action="#">
+            <hr>
+            <form>
                 <div class="duration">
-                    <!-- REVIEW - Remove min, max attribute and implement those in JS along with form validation -->
-                    <input id="day" type="number" placeholder="DD" min="1" max="31">
-                    <input id="month" type="number" placeholder="MM" min="1" max="12">
-                    <input id="year" type="number" placeholder="YYYY" min="1900" max="2022">
+                    <input id="start-date" name="start" type="date">
+                    -
+                    <input id="end-date" name="end" type="date">
                 </div>
-                <div>
-                    <input id="magnitude" type="number" placeholder="Magnitude" min="0">
+                <div class="magnitude">
+                    <input id="min-mag" name="min" type="number" placeholder="min" step="any">
+                    -
+                    <input id="max-mag" name="max" type="number" placeholder="max" step="any">
                     <button id="submit" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#fff">
                             <path d="M0 0h24v24H0z" fill="none" />
