@@ -10,12 +10,18 @@ const map = new mapboxgl.Map({
 
 // let url_duration = [ 'all_hour', 'all_day', 'all_week', 'all_month' ]
 let isFullyLoaded = false
+let url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson'
 
-function addEarthquakes(url) {
+function addEarthquakes(geojson, showTimeAgo) {
     // NOTE - Earthquakes until past month
+    if (!showTimeAgo) {
+        fetch(geojson.replace('/query?', '/count?'))
+            .catch(error => console.log(error))
+    }
+
     map.addSource('earthquakes', {
         type: 'geojson',
-        data: url
+        data: geojson
     })
     map.addLayer({
         id: 'earthquakes',
@@ -49,13 +55,24 @@ function addEarthquakes(url) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
         }
 
-        popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>(${moment(time).fromNow()})</strong></span></div>`).addTo(map)
+        if (showTimeAgo) {
+            popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>(${moment(time).fromNow()})</strong></span></div>`).addTo(map)
+        } else {
+            popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br>${moment(time)}</strong></span></div>`).addTo(map)
+        }
     })
 
     map.on('mouseleave', 'earthquakes', () => {
         map.getCanvas().style.cursor = ''
         popup.remove()
     })
+}
+
+function removeEarthquakes() {
+    if (map.isSourceLoaded('earthquakes') && map.getLayer('earthquakes')) {
+        map.removeLayer('earthquakes')
+        map.removeSource('earthquakes')
+    }
 }
 
 map.on('load', () => {
@@ -149,7 +166,7 @@ map.on('load', () => {
         })
     })
 
-    addEarthquakes('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
+    addEarthquakes(url, true)
 })
 
 map.on('idle', () => {
@@ -204,13 +221,27 @@ map.on('idle', () => {
     }
 })
 
-// // Form submission & validation
-// document.querySelector('form').addEventListener('submit', (e) => {
-//     const data = Object.fromEntries(new FormData(e.target).entries())
-//     console.log(data)
-//     e.preventDefault()
-//     document.getElementById('day').value = ''
-//     document.getElementById('month').value = ''
-//     document.getElementById('year').value = ''
-//     document.getElementById('magnitude').value = ''
-// })
+map.on('idle', () => {
+    // Form submission & validation
+    document.querySelector('form').addEventListener('submit', (e) => {
+        const data = Object.fromEntries(new FormData(e.target).entries())
+        // console.log(data)
+        if (data.start && data.end) {
+            e.preventDefault()
+            removeEarthquakes()
+            if (data.min && data.max) {
+                url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&minmagnitude=${data.min}&maxmagnitude=${data.max}`
+            } else {
+                url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}`
+            }
+            addEarthquakes(url, false)
+        } else {
+            // REVIEW
+            // console.log('Invalid Input')
+        }
+        document.getElementById('start-date').value = ''
+        document.getElementById('end-date').value = ''
+        document.getElementById('min-mag').value = ''
+        document.getElementById('max-mag').value = ''
+    })
+})

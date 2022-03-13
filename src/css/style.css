@@ -4,7 +4,7 @@
 {
     --theme-one: #fff;
     --theme-two: #000;
-    --theme-two: #424242;
+    --theme-three: #424242;
     --blue-one: #1e90ff;
     --blue-two: #1e80ff;
 }
@@ -50,7 +50,7 @@ button:hover
 
 hr
 {
-    border: 1.2px solid var(--theme-two);
+    border: 1.2px solid var(--theme-three);
 }
 
 #menu, #start-date, #end-date, #min-mag, #max-mag
@@ -109,7 +109,7 @@ hr
     user-select: none;
 }
 
-#toggle-menu, #full-menu section div > *, #submit, #close
+#toggle-menu, #full-menu section div > *, #start-date, #end-date, #submit, #close
 {
     cursor: pointer;
 }
@@ -121,6 +121,7 @@ hr
 
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
+    cursor: pointer;
 }
 
 .magnitude
