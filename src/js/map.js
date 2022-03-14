@@ -1,33 +1,46 @@
+// Get Mapbox Access Token
 import TOKEN from '../../config.js'
 
 mapboxgl.accessToken = TOKEN;
 
+// Initialize mapbox object
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/vormir/ckzo5g2rg002l15r0jsz86gsz',
     zoom: 1
 })
 
+// Global variables
 let isFullyLoaded = false
 let url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson'
 let label_text = 'Earthquakes of Past 30 days'
 let date1, date2, min, max
 
+// Function to add earthquakes in map
 function addEarthquakes(geojson, showTimeAgo) {
-    // NOTE - Earthquakes until past month
+
     if (!showTimeAgo) {
+        // Change label text in the menu
         label_text = `Earthquakes from ${date1.format('DD-MM-YYYY')} to ${date2.format('DD-MM-YYYY')}`
         if (min || max) {
             label_text += ` (M ${min}-${max})`
         }
+
+        // Check for API call error(USGS API query response must be <= 20,000)
         fetch(geojson.replace('/query?', '/count?'))
             .catch(error => console.log(error))
     }
 
+    // Show label_text in the menu
+    document.querySelector('#showing-label p').textContent = label_text
+
+    // Add earthquakes source
     map.addSource('earthquakes', {
         type: 'geojson',
         data: geojson
     })
+
+    // Add earthquakes layer of type circle and interpolate circle color, radius w.r.t magnitude
     map.addLayer({
         id: 'earthquakes',
         type: 'circle',
@@ -51,11 +64,11 @@ function addEarthquakes(geojson, showTimeAgo) {
                 ['linear'],
                 ['get', 'mag'],
                 2,
-                5,
+                4,
                 6,
-                8,
+                7,
                 10,
-                11
+                10
             ],
             'circle-stroke-color': [
                 'interpolate',
@@ -72,9 +85,7 @@ function addEarthquakes(geojson, showTimeAgo) {
         }
     })
 
-    document.querySelector('#showing-label p').textContent = label_text
-
-    // NOTE - Popup for earthquakes
+    // Popup for each earthquakes showing magnitude, place and time
     const popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false
@@ -105,6 +116,7 @@ function addEarthquakes(geojson, showTimeAgo) {
     })
 }
 
+// Function to remove earthquakes in map
 function removeEarthquakes() {
     if (map.isSourceLoaded('earthquakes') && map.getLayer('earthquakes')) {
         map.removeLayer('earthquakes')
@@ -112,8 +124,10 @@ function removeEarthquakes() {
     }
 }
 
+// Load tilesets(tectonic plates, GSN Stations, Orogens & Volcanoes) on map load
 map.on('load', () => {
-    // NOTE - Tectonic Plates
+
+    // Load Tectonic Plates of type line
     map.addSource('tectonic-plates', {
         type: 'vector',
         url: 'mapbox://vormir.9teewsr6'
@@ -135,7 +149,7 @@ map.on('load', () => {
         'source-layer': 'PB2002_boundaries-34gn86'
     })
 
-    // NOTE - Global Seismic Station Network Stations
+    // Load Global Seismic Station Network Stations of type symbol
     // REVIEW - Show station name
     map.loadImage('./src/assets/station.png', (error, image) => {
         if (error) throw error
@@ -160,7 +174,7 @@ map.on('load', () => {
         })
     })
 
-    // NOTE - Orogens
+    // Load Orogens of type fill
     map.addSource('orogens', {
         type: 'vector',
         url: 'mapbox://vormir.3f7w5oo2'
@@ -179,7 +193,7 @@ map.on('load', () => {
         'source-layer': 'PB2002_orogens-475qdc'
     })
 
-    // NOTE - Volcanoes
+    // Load Volcanoes of type symbol
     map.loadImage('./src/assets/volcano.png', (error, image) => {
         if (error) throw error
 
@@ -203,16 +217,21 @@ map.on('load', () => {
         })
     })
 
+    // Add earthquakes
     addEarthquakes(url, true)
 })
 
+// Toggle tilesets on/off in map idle state
 map.on('idle', () => {
+
+    // Check if all tilesets are loaded or not
     if (!map.getLayer('Tectonic Plates') || !map.getLayer('GSN Stations') || !map.getLayer('Orogens') || !map.getLayer('Volcanoes')) {
         return
     }
 
     const toggleableLayerIds = ['Tectonic Plates', 'GSN Stations', 'Orogens', 'Volcanoes']
 
+    // Toggle visibility of specific tileset
     for (let id of toggleableLayerIds) {
         if (document.getElementById(id)) {
             continue
@@ -258,12 +277,13 @@ map.on('idle', () => {
     }
 })
 
+// Get earthquakes in specific date and magnitude range in map idle state
 map.on('idle', () => {
-    // Form submission & validation
+
+    // Submitted date and magnitude validation
     document.querySelector('form').addEventListener('submit', (e) => {
         const data = Object.fromEntries(new FormData(e.target).entries())
         e.preventDefault()
-        // console.log(data)
         const today = new Date()
         date1 = moment(data.start, 'YYYY-MM-DD')
         date2 = moment(data.end, 'YYYY-MM-DD')
