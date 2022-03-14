@@ -7,7 +7,8 @@ mapboxgl.accessToken = TOKEN;
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/vormir/ckzo5g2rg002l15r0jsz86gsz',
-    zoom: 1
+    zoom: 1,
+    attributionControl: false
 })
 
 // Global variables
