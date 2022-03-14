@@ -225,19 +225,32 @@ map.on('idle', () => {
     // Form submission & validation
     document.querySelector('form').addEventListener('submit', (e) => {
         const data = Object.fromEntries(new FormData(e.target).entries())
+        e.preventDefault()
         // console.log(data)
-        if (data.start && data.end) {
-            e.preventDefault()
+        const today = new Date()
+        const date1 = moment(data.start, 'YYYY-MM-DD')
+        const date2 = moment(data.end, 'YYYY-MM-DD')
+        const range1 = moment('1800-01-01', 'YYYY-MM-DD')
+        const range2 = moment(today)
+        const isDateValid = (date1.isBetween(range1, range2) || date1.isSame(range1) || date1.isSame(range2)) && (date2.isBetween(range1, range2) || date2.isSame(range1) || date2.isSame(range2)) && (date1.isBefore(date2) && date2.isAfter(date1))
+        if (data.start && data.end && isDateValid) {
             removeEarthquakes()
             if (data.min && data.max) {
                 url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&minmagnitude=${data.min}&maxmagnitude=${data.max}`
             } else {
-                url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}`
+                if (data.min) {
+                    url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&minmagnitude=${data.min}`
+                }
+                else if (data.max) {
+                    url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&maxmagnitude=${data.max}`
+                } else {
+                    url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}`
+                }
             }
             addEarthquakes(url, false)
         } else {
             // REVIEW
-            // console.log('Invalid Input')
+            // console.log('Invalid Date')
         }
         document.getElementById('start-date').value = ''
         document.getElementById('end-date').value = ''
