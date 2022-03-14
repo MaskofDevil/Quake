@@ -8,13 +8,18 @@ const map = new mapboxgl.Map({
     zoom: 1
 })
 
-// let url_duration = [ 'all_hour', 'all_day', 'all_week', 'all_month' ]
 let isFullyLoaded = false
 let url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson'
+let label_text = 'Earthquakes of Past 30 days'
+let date1, date2, min, max
 
 function addEarthquakes(geojson, showTimeAgo) {
     // NOTE - Earthquakes until past month
     if (!showTimeAgo) {
+        label_text = `Earthquakes from ${date1.format('DD-MM-YYYY')} to ${date2.format('DD-MM-YYYY')}`
+        if (min || max) {
+            label_text += ` (M ${min}-${max})`
+        }
         fetch(geojson.replace('/query?', '/count?'))
             .catch(error => console.log(error))
     }
@@ -28,14 +33,46 @@ function addEarthquakes(geojson, showTimeAgo) {
         type: 'circle',
         source: 'earthquakes',
         paint: {
-            'circle-blur': 0.5,
-            'circle-color': '#fc691d',
-            'circle-opacity': 0.6,
-            'circle-radius': 5,
-            'circle-stroke-color': '#fc691d',
+            'circle-blur': 0.3,
+            'circle-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'mag'],
+                2,
+                '#fca31d',
+                4,
+                '#fc691d',
+                6,
+                '#fc1d1d'
+            ],
+            'circle-opacity': 0.5,
+            'circle-radius': [
+                'interpolate',
+                ['linear'],
+                ['get', 'mag'],
+                2,
+                5,
+                6,
+                8,
+                10,
+                11
+            ],
+            'circle-stroke-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'mag'],
+                2,
+                '#fca31d',
+                4,
+                '#fc691d',
+                6,
+                '#fc1d1d'
+            ],
             'circle-stroke-width': 1
         }
     })
+
+    document.querySelector('#showing-label p').textContent = label_text
 
     // NOTE - Popup for earthquakes
     const popup = new mapboxgl.Popup({
@@ -228,21 +265,25 @@ map.on('idle', () => {
         e.preventDefault()
         // console.log(data)
         const today = new Date()
-        const date1 = moment(data.start, 'YYYY-MM-DD')
-        const date2 = moment(data.end, 'YYYY-MM-DD')
+        date1 = moment(data.start, 'YYYY-MM-DD')
+        date2 = moment(data.end, 'YYYY-MM-DD')
         const range1 = moment('1800-01-01', 'YYYY-MM-DD')
         const range2 = moment(today)
         const isDateValid = (date1.isBetween(range1, range2) || date1.isSame(range1) || date1.isSame(range2)) && (date2.isBetween(range1, range2) || date2.isSame(range1) || date2.isSame(range2)) && (date1.isBefore(date2) && date2.isAfter(date1))
+
+        min = data.min
+        max = data.max
+
         if (data.start && data.end && isDateValid) {
             removeEarthquakes()
             if (data.min && data.max) {
-                url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&minmagnitude=${data.min}&maxmagnitude=${data.max}`
+                url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&minmagnitude=${min}&maxmagnitude=${max}`
             } else {
                 if (data.min) {
-                    url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&minmagnitude=${data.min}`
+                    url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&minmagnitude=${min}`
                 }
                 else if (data.max) {
-                    url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&maxmagnitude=${data.max}`
+                    url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}&maxmagnitude=${max}`
                 } else {
                     url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${data.start}&endtime=${data.end}`
                 }

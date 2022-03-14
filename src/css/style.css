@@ -114,6 +114,14 @@ hr
     cursor: pointer;
 }
 
+#showing-label p
+{
+    font-size: 0.7rem;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+    background-color: var(--theme-three);
+}
+
 #start-date, #end-date
 {
     width: 8.2rem;
@@ -165,7 +173,6 @@ hr
 .popup 
 {
     max-width: 10rem;
-    border-radius: 0.2rem;
     display: flex;
     align-items: center;
 }
