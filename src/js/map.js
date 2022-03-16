@@ -6,9 +6,10 @@ mapboxgl.accessToken = TOKEN;
 // Initialize mapbox object
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/vormir/ckzo5g2rg002l15r0jsz86gsz',
+    style: 'mapbox://styles/mapbox/light-v8',
     zoom: 1,
-    attributionControl: false
+    attributionControl: false,
+    dragRotate: false
 })
 
 // Global variables
@@ -24,7 +25,7 @@ function addEarthquakes(geojson, showTimeAgo) {
         // Change label text in the menu
         label_text = `Earthquakes from ${date1.format('DD-MM-YYYY')} to ${date2.format('DD-MM-YYYY')}`
         if (min || max) {
-            label_text += ` (M ${min}-${max})`
+            label_text += ` (M ${parseFloat(min).toFixed(1)}-${parseFloat(max).toFixed(1)})`
         }
 
         // Check for API call error(USGS API query response must be <= 20,000)

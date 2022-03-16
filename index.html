@@ -24,10 +24,32 @@
         <div id="full-menu" class="inactive">
             <section>
             </section>
-            <hr>
+            <div class="partition"></div>
             <!-- <section>
             </section>
             <hr> -->
+            <div class="carousel" data-carousel>
+                <button class="carousel-button prev" data-carousel-button="prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                    </svg>
+                </button>
+                <button class="carousel-button next" data-carousel-button="next">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                    </svg>
+                </button>
+                <ul data-slides>
+                    <li class="slide" data-active> </li>
+                    <li class="slide"></li>
+                    <li class="slide"></li>
+                    <li class="slide"></li>
+                    <li class="slide"></li>
+                </ul>
+            </div>
+            <div class="partition"></div>
             <form>
                 <div id="showing-label">
                     <p></p>
@@ -62,7 +84,7 @@
     </div>
     <div id="map"></div>
     <script src="./src/js/map.js" type="module"></script>
-    <script src="./src/js/script.js"></script>
+    <script src="./src/js/script.js" type="module"></script>
 </body>
 
 </html>
