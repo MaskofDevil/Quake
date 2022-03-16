@@ -98,7 +98,7 @@ function addEarthquakes(geojson, showTimeAgo) {
 
         let coordinates = e.features[0].geometry.coordinates.slice()
         let mag = e.features[0].properties.mag
-        let place = e.features[0].properties.place
+        let place = e.features[0].properties.place ? e.features[0].properties.place : ''
         let time = new Date(e.features[0].properties.time)
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
@@ -108,7 +108,7 @@ function addEarthquakes(geojson, showTimeAgo) {
         if (showTimeAgo) {
             popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>(${moment(time).fromNow()})</strong></span></div>`).addTo(map)
         } else {
-            popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br>${moment(time)}</strong></span></div>`).addTo(map)
+            popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>${moment(time).format('dddd LT')}</strong><strong>${moment(time).format('DD-MM-YYYY')}</strong></span></div>`).addTo(map)
         }
     })
 
@@ -252,7 +252,19 @@ map.on('idle', () => {
         div.appendChild(input)
         div.appendChild(label)
 
-        div.addEventListener('click', (e) => {
+        input.addEventListener('click', (e) => {
+            let clickedLayer = label.textContent
+
+            let visibility = map.getLayoutProperty(clickedLayer, 'visibility')
+
+            if (visibility === 'visible') {
+                map.setLayoutProperty(clickedLayer, 'visibility', 'none')
+            } else {
+                map.setLayoutProperty(clickedLayer, 'visibility', 'visible')
+            }
+        })
+
+        label.addEventListener('click', (e) => {
             let clickedLayer = label.textContent
             e.preventDefault()
             e.stopPropagation()

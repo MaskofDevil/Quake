@@ -2,10 +2,10 @@
 
 :root
 {
-    --theme-one: #fff;
-    --theme-two: #000;
-    --theme-three: #ffffff4d;
-    --theme-four: #ffffff26;
+    --theme-one: #000;
+    --theme-two: #fff;
+    --theme-three: rgba(0, 0, 0, 0.3);
+    --theme-four: rgba(0, 0, 0, 0.15);
     --blue-one: #1e90ff;
     --blue-two: #1e80ff;
 }
@@ -15,7 +15,7 @@ body
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: var(--blue-one);
+    background-color: var(--theme-two);
 }
 
 svg
@@ -62,7 +62,7 @@ button:hover
     z-index: 9999;
     height: 100vh;
     width: 100vw;
-    background-color: var(--theme-one);
+    background-color: var(--theme-two);
     display: flex;
     justify-content: center;
     align-items: center;
