@@ -12,7 +12,7 @@ Quake is a realtime earthquake visualization web application.
 ![Quake Screenshot](./src/assets/quake.png)
 
 
-##### Project Structure:
+## Project Structure:
 
     Quake/
     ├── src/
@@ -33,10 +33,11 @@ Quake is a realtime earthquake visualization web application.
 
 ## Features
 
-- Realtime earthquake data
+- Realtime earthquakes data
+- Past five earthquakes carousel
 - Specific earthquake data(by day, month, year and magnitude)
-- Visualization of tectonic plates, orogens & volcanoes
-- Different styles (such as - light, dark, night, street)
+- Visualization of tectonic plates, orogens, global seismic network & volcanoes
+- Different styles (such as - light, dark, street and night)
 
 
 ## Run Locally
@@ -65,6 +66,8 @@ Open index.html in any web browser
 
 ## Tech Stack
 
-**Client:** HTML, CSS, JavaScript
+**Client:** HTML, CSS, JavaScript, Fetch API, Moment.js
 
-**Server:** Mapbox GL JS, Mapbox Tileset api, USGS api
+**Server:** Mapbox GL JS, Mapbox Tileset API, USGS API
+
+### ⭐ Star this repo
