@@ -4,7 +4,8 @@
 {
     --theme-one: #fff;
     --theme-two: #000;
-    --theme-three: #424242;
+    --theme-three: #ffffff4d;
+    --theme-four: #ffffff26;
     --blue-one: #1e90ff;
     --blue-two: #1e80ff;
 }
@@ -17,6 +18,11 @@ body
     background-color: var(--blue-one);
 }
 
+svg
+{
+    color: var(--theme-one);
+}
+
 input, button
 {
     border: none;
@@ -25,6 +31,8 @@ input, button
 input
 {
     outline: none;
+    color: var(--theme-one);
+    background-color: var(--theme-four);
 }
 
 input::-webkit-outer-spin-button,
@@ -48,26 +56,13 @@ button:hover
     background-color: var(--blue-two);
 }
 
-.partition
-{
-    background-color: var(--theme-three);
-    border: 1.2px solid var(--theme-three);
-    margin: 0.5rem;
-}
-
-#menu, #start-date, #end-date, #min-mag, #max-mag
-{
-    color: var(--theme-one);
-    background-color: var(--theme-two);
-}
-
 .overlay
 {
     position: absolute;
     z-index: 9999;
     height: 100vh;
     width: 100vw;
-    background-color: #fff;
+    background-color: var(--theme-one);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,6 +86,8 @@ button:hover
     border-radius: 0.2rem;
     display: flex;
     flex-direction: column;
+    color: var(--theme-one);
+    background-color: var(--theme-two);
 }
 
 #full-menu section, .duration, #min-mag, #max-mag
@@ -115,12 +112,24 @@ button:hover
     cursor: pointer;
 }
 
+.partition
+{
+    background-color: var(--theme-four);
+    border: 1.2px solid var(--theme-four);
+    margin: 0.5rem;
+}
+
 #showing-label p
 {
     font-size: 0.7rem;
     padding: 0.3rem;
     border-radius: 0.2rem;
-    background-color: var(--theme-three);
+    background-color: var(--theme-four);
+}
+
+.duration
+{
+    font-size: 0.8rem;
 }
 
 #start-date, #end-date
@@ -135,6 +144,7 @@ button:hover
 
 .magnitude
 {
+    font-size: 0.8rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -159,6 +169,11 @@ button:hover
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
+}
+
+#close svg
+{
+    color: var(--theme-three);
 }
 
 .active
@@ -289,13 +304,12 @@ button:hover
     border: none;
     cursor: pointer;
     padding: 0 .5rem;
-    background-color: rgba(0, 0, 0, .1);
+    background-color: var(--theme-four);
 }
 
-.carousel-button:hover,
-.carousel-button:focus 
+.carousel-button:hover
 {
-    background-color: rgba(0, 0, 0, .2);
+    background-color: var(--theme-three);
 }
 
 .carousel-button.next 
