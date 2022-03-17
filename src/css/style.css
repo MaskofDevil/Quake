@@ -4,8 +4,8 @@
 {
     --theme-one: #000;
     --theme-two: #fff;
-    --theme-three: rgba(0, 0, 0, 0.3);
-    --theme-four: rgba(0, 0, 0, 0.15);
+    --theme-three: #0000004d;
+    --theme-four: #00000026;
     --blue-one: #1e90ff;
     --blue-two: #1e80ff;
 }
@@ -107,7 +107,7 @@ button:hover
     user-select: none;
 }
 
-#toggle-menu, #full-menu section div > *, #start-date, #end-date, #submit, #close
+#toggle-menu, #full-menu section div > *, #start-date, #end-date, #submit, #theme-toggle, #close
 {
     cursor: pointer;
 }
@@ -162,6 +162,13 @@ button:hover
     width: 7rem;
     margin-left: 1rem;
     border-radius: 1.2rem;
+}
+
+#theme-toggle
+{
+    position: absolute;
+    top: 0.5rem;
+    right: 2rem;
 }
 
 #close
@@ -223,6 +230,7 @@ button:hover
     color: var(--theme-one);
     opacity: 0.7;
     text-decoration: none;
+    user-select: none;
 }
 
 .carousel 

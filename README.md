@@ -37,7 +37,7 @@ Quake is a realtime earthquake visualization web application.
 - Past five earthquakes carousel
 - Specific earthquake data(by day, month, year and magnitude)
 - Visualization of tectonic plates, orogens, global seismic network & volcanoes
-- Different styles (such as - light, dark, street and night)
+- Toggle between light and dark mode
 
 
 ## Run Locally

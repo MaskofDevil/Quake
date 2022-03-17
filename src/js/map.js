@@ -8,9 +8,14 @@ const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v8',
     zoom: 1,
-    attributionControl: false,
-    dragRotate: false
+    attributionControl: false
 })
+
+// disable map rotation using right click + drag
+map.dragRotate.disable()
+
+// disable map rotation using touch rotation gesture
+map.touchZoomRotate.disableRotation()
 
 // Global variables
 let isFullyLoaded = false

@@ -1,17 +1,43 @@
 import TOKEN from '../../config.js'
 
+// Open and close menu
 document.getElementById('toggle-menu').addEventListener('click', () => {
     document.getElementById('full-menu').classList.replace('inactive', 'active')
     document.getElementById('toggle-menu').classList.replace('active', 'inactive')
+    document.getElementById('theme-toggle').classList.replace('inactive', 'active')
     document.getElementById('close').classList.replace('inactive', 'active')
 })
 
 document.getElementById('close').addEventListener('click', () => {
     document.getElementById('full-menu').classList.replace('active', 'inactive')
+    document.getElementById('theme-toggle').classList.replace('active', 'inactive')
     document.getElementById('close').classList.replace('active', 'inactive')
     document.getElementById('toggle-menu').classList.replace('inactive', 'active')
 })
 
+// Light and dark mode toggle
+let isLightMode = true
+const root = document.querySelector(':root')
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    if (isLightMode) {
+        document.getElementById('map').style.filter = 'invert()'
+        root.style.setProperty('--theme-one', '#fff')
+        root.style.setProperty('--theme-two', '#000')
+        root.style.setProperty('--theme-three', '#ffffff4d')
+        root.style.setProperty('--theme-four', '#ffffff26')
+        isLightMode = false
+    } else {
+        document.getElementById('map').style.filter = 'none'
+        root.style.setProperty('--theme-one', '#000')
+        root.style.setProperty('--theme-two', '#fff')
+        root.style.setProperty('--theme-three', '#0000004d')
+        root.style.setProperty('--theme-four', '#00000026')
+        isLightMode = true
+    }
+})
+
+// Recent five earthquakes carousel
 const buttons = document.querySelectorAll("[data-carousel-button]")
 
 buttons.forEach(button => {
