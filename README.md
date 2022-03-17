@@ -9,7 +9,11 @@ Quake is a realtime earthquake visualization web application.
 
 ## Screenshots
 
-![Quake Screenshot](./src/assets/quake.png)
+#### **Light Mode**:
+![Quake Screenshot](./src/assets/quake-light.png)
+
+#### **Dark Mode**:
+![Quake Screenshot](./src/assets/quake-dark.png)
 
 
 ## Project Structure:
