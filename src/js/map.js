@@ -28,7 +28,7 @@ function addEarthquakes(geojson, showTimeAgo) {
 
     if (!showTimeAgo) {
         // Change label text in the menu
-        label_text = `Earthquakes from ${date1.format('DD-MM-YYYY')} to ${date2.format('DD-MM-YYYY')}`
+        label_text = `Earthquakes from ${date1.format('DD/MM/YYYY')} to ${date2.format('DD/MM/YYYY')}`
         if (min || max) {
             label_text += ` (M ${parseFloat(min).toFixed(1)}-${parseFloat(max).toFixed(1)})`
         }
@@ -113,7 +113,7 @@ function addEarthquakes(geojson, showTimeAgo) {
         if (showTimeAgo) {
             popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>(${moment(time).fromNow()})</strong></span></div>`).addTo(map)
         } else {
-            popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>${moment(time).format('dddd LT')}</strong><strong>${moment(time).format('DD-MM-YYYY')}</strong></span></div>`).addTo(map)
+            popup.setLngLat(coordinates).setHTML(`<div class="popup"><h2 class="popup-mag">${mag.toFixed(1)}</h2><span class="popup-text">${place}<br><strong>${moment(time).format('dddd LT')}</strong><strong>${moment(time).format('DD/MM/YYYY')}</strong></span></div>`).addTo(map)
         }
     })
 
@@ -131,7 +131,7 @@ function removeEarthquakes() {
     }
 }
 
-// Load tilesets(tectonic plates, GSN Stations, Orogens & Volcanoes) on map load
+// Load tilesets(tectonic plates, Global Seismic Network, Orogens & Volcanoes) on map load
 map.on('load', () => {
 
     // Load Tectonic Plates of type line
@@ -156,31 +156,6 @@ map.on('load', () => {
         'source-layer': 'PB2002_boundaries-34gn86'
     })
 
-    // Load Global Seismic Station Network Stations of type symbol
-    // REVIEW - Show station name
-    map.loadImage('./src/assets/station.png', (error, image) => {
-        if (error) throw error
-
-        map.addImage('s', image)
-
-        map.addSource('stations', {
-            type: 'vector',
-            url: 'mapbox://vormir.5sfg2jsk'
-        })
-
-        map.addLayer({
-            id: 'GSN Stations',
-            type: 'symbol',
-            source: 'stations',
-            layout: {
-                'icon-image': 's',
-                'icon-size': 0.6,
-                'visibility': 'none'
-            },
-            'source-layer': 'Global_Stations-biqr7b'
-        })
-    })
-
     // Load Orogens of type fill
     map.addSource('orogens', {
         type: 'vector',
@@ -198,6 +173,31 @@ map.on('load', () => {
             'fill-opacity': 0.6
         },
         'source-layer': 'PB2002_orogens-475qdc'
+    })
+
+    // Load Global Seismic Station Network Stations of type symbol
+    // REVIEW - Show station name
+    map.loadImage('./src/assets/station.png', (error, image) => {
+        if (error) throw error
+
+        map.addImage('s', image)
+
+        map.addSource('stations', {
+            type: 'vector',
+            url: 'mapbox://vormir.5sfg2jsk'
+        })
+
+        map.addLayer({
+            id: 'Global Seismic Network',
+            type: 'symbol',
+            source: 'stations',
+            layout: {
+                'icon-image': 's',
+                'icon-size': 0.6,
+                'visibility': 'none'
+            },
+            'source-layer': 'Global_Stations-biqr7b'
+        })
     })
 
     // Load Volcanoes of type symbol
@@ -232,11 +232,11 @@ map.on('load', () => {
 map.on('idle', () => {
 
     // Check if all tilesets are loaded or not
-    if (!map.getLayer('Tectonic Plates') || !map.getLayer('GSN Stations') || !map.getLayer('Orogens') || !map.getLayer('Volcanoes')) {
+    if (!map.getLayer('Tectonic Plates') || !map.getLayer('Orogens') || !map.getLayer('Global Seismic Network') || !map.getLayer('Volcanoes')) {
         return
     }
 
-    const toggleableLayerIds = ['Tectonic Plates', 'GSN Stations', 'Orogens', 'Volcanoes']
+    const toggleableLayerIds = ['Tectonic Plates', 'Orogens', 'Global Seismic Network', 'Volcanoes']
 
     // Toggle visibility of specific tileset
     for (let id of toggleableLayerIds) {

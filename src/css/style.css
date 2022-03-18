@@ -235,8 +235,8 @@ button:hover
 
 .carousel 
 {
-    width: 300px;
-    height: 120px;
+    width: 280px;
+    height: 112px;
     position: relative;
 }
 
@@ -276,7 +276,7 @@ button:hover
 {
     position: absolute;
     width: 60%;
-    left: 3.1rem;
+    left: 2.9rem;
     color: white;
     background-color: rgba(0, 0, 0, .5);
     padding: 0.6rem;
@@ -298,7 +298,14 @@ button:hover
 
 .slide-subheading > p 
 {
-    margin: 0.5rem 0;
+    margin: 0.2rem 0;
+}
+
+.slide-place {
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }
 
 .carousel-button 

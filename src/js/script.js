@@ -66,10 +66,10 @@ fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojs
             let place = data.features[i].properties.place
             let datetime = new Date(data.features[i].properties.time)
             let time = moment(datetime).format('LT')
-            let date = moment(datetime).format('DD-MM-YYYY')
+            let date = moment(datetime).format('DD/MM/YYYY')
             let mag = `M ${data.features[i].properties.mag.toFixed(1)}`
 
-            document.getElementsByClassName('slide')[i].innerHTML = `<div class="slide-details"><p>${time}</p><div class="slide-subheading"><p>${mag}</p><p>${date}</p></div></div>`
+            document.getElementsByClassName('slide')[i].innerHTML = `<div class="slide-details"><p>${time}</p><div class="slide-subheading"><p>${mag}</p><p>${date}</p></div><div class="slide-place"><svg xmlns="http://www.w3.org/2000/svg" height="12px" viewBox="0 0 24 24" width="12px" fill="#fff"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>${place}</div></div>`
 
             const img = document.createElement('img')
             img.src = `https://api.mapbox.com/v4/mapbox.satellite/${coords[0]},${coords[1]},7/360x80@2x.png?access_token=${TOKEN}`
