@@ -63,6 +63,7 @@ button:hover
     height: 100vh;
     width: 100vw;
     background-color: var(--theme-two);
+    opacity: 0.9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,6 +98,7 @@ button:hover
 
 #full-menu section
 {
+    width: 95%;
     display: flex;
     flex-direction: column;
 }
@@ -114,123 +116,10 @@ button:hover
 
 .partition
 {
+    width: 17.5rem;
+    height: 0.2rem;
     background-color: var(--theme-four);
-    border: 1.2px solid var(--theme-four);
     margin: 0.5rem;
-}
-
-#showing-label p
-{
-    font-size: 0.7rem;
-    padding: 0.3rem;
-    border-radius: 0.2rem;
-    background-color: var(--theme-four);
-}
-
-.duration
-{
-    font-size: 0.8rem;
-}
-
-#start-date, #end-date
-{
-    width: 8.2rem;
-}
-
-::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    cursor: pointer;
-}
-
-.magnitude
-{
-    font-size: 0.8rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#min-mag, #max-mag
-{
-    width: 2rem;
-    border: none;
-}
-
-#submit
-{
-    height: 2rem;
-    width: 7rem;
-    margin-left: 1rem;
-    border-radius: 1.2rem;
-}
-
-#theme-toggle
-{
-    position: absolute;
-    top: 0.5rem;
-    right: 2rem;
-}
-
-#close
-{
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-}
-
-#close svg
-{
-    color: var(--theme-three);
-}
-
-.active
-{
-    display: block;
-}
-
-.inactive
-{
-    display: none;
-}
-
-.popup 
-{
-    max-width: 10rem;
-    display: flex;
-    align-items: center;
-}
-
-.popup-mag 
-{
-    margin-right: 0.5rem;
-    font-size: 1.2rem;
-}
-
-.popup-text 
-{
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#info
-{
-    position: absolute;
-    right: 0;
-    z-index: 7999;
-    margin-top: 0.6rem;
-    margin-right: 0.5rem;
-}
-
-#info a
-{
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: var(--theme-one);
-    opacity: 0.7;
-    text-decoration: none;
-    user-select: none;
 }
 
 .carousel 
@@ -305,7 +194,6 @@ button:hover
     font-size: 0.7rem;
     display: flex;
     align-items: center;
-    overflow: hidden;
 }
 
 .carousel-button 
@@ -330,4 +218,126 @@ button:hover
 .carousel-button.next 
 {
     right: 0;
+}
+
+#showing-label p
+{
+    font-size: 0.7rem;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+}
+
+.duration
+{
+    font-size: 0.8rem;
+}
+
+#start-date, #end-date
+{
+    width: 8.2rem;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.magnitude
+{
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#min-mag, #max-mag
+{
+    width: 2rem;
+    border: none;
+}
+
+#submit
+{
+    height: 2rem;
+    width: 7rem;
+    margin-left: 1rem;
+    border-radius: 1.2rem;
+}
+
+#theme-toggle
+{
+    position: absolute;
+    top: 0.5rem;
+    right: 2rem;
+}
+
+#close
+{
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+#close svg
+{
+    color: var(--theme-three);
+}
+
+.active
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inactive
+{
+    display: none;
+}
+
+.mapboxgl-popup-content
+{
+    font-family: 'Roboto', sans-serif;
+}
+
+.popup 
+{
+    max-width: 10rem;
+    display: flex;
+    align-items: center;
+}
+
+.popup-head
+{
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.popup-text 
+{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#info
+{
+    position: absolute;
+    right: 0;
+    z-index: 7999;
+    margin-top: 0.6rem;
+    margin-right: 0.5rem;
+}
+
+#info a
+{
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--theme-one);
+    opacity: 0.7;
+    text-decoration: none;
+    user-select: none;
 }

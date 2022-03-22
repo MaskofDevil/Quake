@@ -22,8 +22,10 @@ Quake is a realtime earthquake visualization web application.
     ├── src/
     |   ├── assets/
     |   |   ├── favicon.ico
+    |   |   ├── loading.gif
     |   |   ├── Logo.png
-    |   |   ├── quake.png
+    |   |   ├── quake-dark.png
+    |   |   ├── quake-light.png
     |   |   └── volcano.png
     |   ├── css/
     |   |   └── style.css
@@ -38,7 +40,7 @@ Quake is a realtime earthquake visualization web application.
 ## Features
 
 - Realtime earthquakes data
-- Past five earthquakes carousel
+- Past three earthquakes carousel
 - Specific earthquake data(by day, month, year and magnitude)
 - Visualization of tectonic plates, orogens, global seismic network & volcanoes
 - Toggle between light and dark mode

@@ -61,7 +61,7 @@ buttons.forEach(button => {
 fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
     .then(response => response.json())
     .then(data => {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 3; i++) {
             let coords = data.features[i].geometry.coordinates
             let place = data.features[i].properties.place
             let datetime = new Date(data.features[i].properties.time)
