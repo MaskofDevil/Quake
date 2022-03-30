@@ -7,7 +7,7 @@ mapboxgl.accessToken = TOKEN;
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v8',
-    zoom: 1,
+    zoom: 1.5,
     attributionControl: false
 })
 
@@ -16,6 +16,11 @@ map.dragRotate.disable()
 
 // disable map rotation using touch rotation gesture
 map.touchZoomRotate.disableRotation()
+
+// add map controls
+map.addControl(new mapboxgl.NavigationControl({
+    showCompass: false
+}), 'bottom-right')
 
 // Global variables
 let isFullyLoaded = false

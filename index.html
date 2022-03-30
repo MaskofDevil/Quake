@@ -22,9 +22,7 @@
             <path d="M16.37 10.8L8.99 16.54L1.62 10.81L0 12.07L9 19.07L18 12.07L16.37 10.8ZM9 0L0 7L1.63 8.27L9 14L16.36 8.27L18 7L9 0ZM9 11.47L3.26 7L9 2.53L14.74 7L9 11.47Z" fill="currentColor" />
         </svg>
         <div id="full-menu" class="inactive">
-            <section>
-            </section>
-            <div class="partition"></div>
+            <h4>Latest Earthquakes</h4>
             <div class="carousel" data-carousel>
                 <button class="carousel-button prev" data-carousel-button="prev">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
@@ -45,9 +43,39 @@
                 </ul>
             </div>
             <div class="partition"></div>
+            <h4>Custom Features</h4>
+            <section>
+            </section>
             <form>
                 <div id="showing-label">
                     <p></p>
+                </div>
+                <div class="circle-by-mag">
+                    Magnitude:
+                    <div id="mag-2">
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="5" cy="5" r="5" fill="#FC1D1D" />
+                        </svg>
+                        <p>&lt; 2</p>
+                    </div>
+                    <div id="mag-4">
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="4" cy="4" r="4" fill="#FC691D" />
+                        </svg>
+                        <p>&gt; 2 & &lt;= 4</p>
+                    </div>
+                    <div id="mag-6">
+                        <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="3" cy="3" r="3" fill="#FCA31D" />
+                        </svg>
+                        <p>&gt; 6</p>
+                    </div>
+                    <div id="mag-unknown">
+                        <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="3" cy="3" r="3" fill="black" />
+                        </svg>
+                        <p>unknown</p>
+                    </div>
                 </div>
                 <div class="duration">
                     <input id="start-date" name="start" type="date">

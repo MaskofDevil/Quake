@@ -91,35 +91,9 @@ button:hover
     background-color: var(--theme-two);
 }
 
-#full-menu section, .duration, #min-mag, #max-mag
+#full-menu h4
 {
-    margin: 0.3rem 0;
-}
-
-#full-menu section
-{
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-}
-
-#full-menu section div > *
-{
-    display: inline-flex;
-    user-select: none;
-}
-
-#toggle-menu, #full-menu section div > *, #start-date, #end-date, #submit, #theme-toggle, #close
-{
-    cursor: pointer;
-}
-
-.partition
-{
-    width: 17.5rem;
-    height: 0.2rem;
-    background-color: var(--theme-four);
-    margin: 0.5rem;
+    margin: 0.5rem 0;
 }
 
 .carousel 
@@ -215,9 +189,40 @@ button:hover
     background-color: var(--theme-three);
 }
 
-.carousel-button.next 
+.carousel-button.next
 {
     right: 0;
+}
+
+#full-menu section, .duration, #min-mag, #max-mag
+{
+    margin: 0.3rem 0;
+}
+
+#full-menu section
+{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+}
+
+#full-menu section div > *
+{
+    display: inline-flex;
+    user-select: none;
+}
+
+#toggle-menu, #full-menu section div > *, #start-date, #end-date, #submit, #theme-toggle, #close
+{
+    cursor: pointer;
+}
+
+.partition
+{
+    width: 17.5rem;
+    height: 0.2rem;
+    background-color: var(--theme-four);
+    margin: 0.5rem;
 }
 
 #showing-label p
@@ -225,6 +230,33 @@ button:hover
     font-size: 0.7rem;
     padding: 0.3rem;
     border-radius: 0.2rem;
+}
+
+.circle-by-mag
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 0.7rem;
+    font-weight: bold;
+    background-color: var(--theme-four);
+}
+
+.circle-by-mag > *
+{
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+}
+
+.circle-by-mag > * svg
+{
+    padding: 0 0.2rem;
+}
+
+.circle-by-mag > * p
+{
+    font-size: 0.7rem;
 }
 
 .duration

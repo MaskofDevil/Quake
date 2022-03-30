@@ -26,6 +26,12 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
         root.style.setProperty('--theme-two', '#000')
         root.style.setProperty('--theme-three', '#ffffff4d')
         root.style.setProperty('--theme-four', '#ffffff26')
+
+        document.querySelector('#mag-2 svg circle').style.fill = '#035ce2'
+        document.querySelector('#mag-4 svg circle').style.fill = '#0396e2'
+        document.querySelector('#mag-6 svg circle').style.fill = '#03e2e2'
+        document.querySelector('#mag-unknown svg circle').style.fill = '#fff'
+
         isLightMode = false
     } else {
         document.getElementById('map').style.filter = 'none'
@@ -33,6 +39,12 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
         root.style.setProperty('--theme-two', '#fff')
         root.style.setProperty('--theme-three', '#0000004d')
         root.style.setProperty('--theme-four', '#00000026')
+
+        document.querySelector('#mag-2 svg circle').style.fill = '#fc1d1d'
+        document.querySelector('#mag-4 svg circle').style.fill = '#fc691d'
+        document.querySelector('#mag-6 svg circle').style.fill = '#fca31d'
+        document.querySelector('#mag-unknown svg circle').style.fill = '#000'
+
         isLightMode = true
     }
 })
