@@ -80,8 +80,8 @@ button:hover
 #menu
 {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    bottom: 0.6rem;
+    left: 0.6rem;
     padding: 1rem;
     z-index: 8999;
     border-radius: 0.2rem;
@@ -89,11 +89,12 @@ button:hover
     flex-direction: column;
     color: var(--theme-one);
     background-color: var(--theme-two);
+    filter: drop-shadow(0 0 4px var(--theme-four));
 }
 
 #full-menu h4
 {
-    margin: 0.5rem 0;
+    margin: 0 0 0.5rem 0;
 }
 
 .carousel 
@@ -358,7 +359,8 @@ button:hover
 #info
 {
     position: absolute;
-    right: 0;
+    bottom: 2rem;
+    right: 0.2rem;
     z-index: 7999;
     margin-top: 0.6rem;
     margin-right: 0.5rem;
@@ -368,7 +370,7 @@ button:hover
 {
     font-size: 0.7rem;
     font-weight: bold;
-    color: var(--theme-one);
+    color: var(--theme-three);
     opacity: 0.7;
     text-decoration: none;
     user-select: none;

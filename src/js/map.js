@@ -8,6 +8,7 @@ const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v8',
     zoom: 1.5,
+    logoPosition: 'bottom-right',
     attributionControl: false
 })
 
@@ -17,10 +18,17 @@ map.dragRotate.disable()
 // disable map rotation using touch rotation gesture
 map.touchZoomRotate.disableRotation()
 
-// add map controls
+// add zoom in & zoom out map controls
 map.addControl(new mapboxgl.NavigationControl({
     showCompass: false
-}), 'bottom-right')
+}), 'top-right')
+
+// add geocoder(search bar) map control
+map.addControl(new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    placeholder: 'Search Location'
+}), 'top-left')
 
 // Global variables
 let isFullyLoaded = false
@@ -93,10 +101,15 @@ function addPopup(source, showTimeAgo) {
         }
         else if (source === 'Volcanoes') {
             let name = e.features[0].properties.V_Name ? e.features[0].properties.V_Name : ''
+            let country = e.features[0].properties.Country
 
             popup.setLngLat(coordinates).setHTML(
                 `<div class="popup">
-                    <span class="popup-text">${name}</span>
+                    <span class="popup-text">
+                        ${name}
+                        <br>
+                        <strong>${country}</strong>
+                    </span>
                 </div>`
             ).addTo(map)
         }
